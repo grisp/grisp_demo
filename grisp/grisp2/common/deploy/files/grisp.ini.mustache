@@ -1,0 +1,9 @@
+[boot]
+image_path = /media/mmcsd-0-0/{{release_name}}/erts-{{erts_vsn}}/bin/beam
+
+[erlang]
+args = erl.rtems -C multi_time_warp -- -mode embedded -home . -pa . -root {{release_name}} -boot {{release_name}}/releases/{{release_version}}/start -internal_epmd epmd_sup -kernel inetrc "./erl_inetrc" -sname shell -setcookie grisp
+
+[network]
+ip_self = dhcp
+hostname = grisp
