@@ -1,0 +1,16 @@
+{application, demo, [
+    {description, "GRiSP demonstration application"},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {mod, {demo, []}},
+    {applications, [
+        kernel,
+        stdlib,
+        grisp
+    ]},
+    {env,[]},
+    {modules, []},
+
+    {licenses, ["Apache 2.0"]},
+    {links, []}
+]}.
