@@ -1,8 +1,8 @@
-{application, demo, [
+{application, grisp_demo, [
     {description, "GRiSP demonstration application"},
     {vsn, "0.1.0"},
     {registered, []},
-    {mod, {demo, []}},
+    {mod, {grisp_demo, []}},
     {applications, [
         kernel,
         stdlib,

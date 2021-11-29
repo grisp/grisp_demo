@@ -1,6 +1,6 @@
 % @private
 % @doc GRiSP demonstration top level supervisor.
--module(demo_sup).
+-module(grisp_demo_sup).
 
 -behavior(supervisor).
 

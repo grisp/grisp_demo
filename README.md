@@ -1,3 +1,3 @@
-# grisp_image
+# grisp_demo
 
-Default image for new GRiSP boards
+Demo application for GRiSP boards

@@ -1,5 +1,5 @@
 % @doc GRiSP demonstration API.
--module(demo).
+-module(grisp_demo).
 
 -behavior(application).
 
@@ -11,7 +11,7 @@
 
 % @private
 start(_Type, _Args) ->
-    {ok, Supervisor} = demo_sup:start_link(),
+    {ok, Supervisor} = grisp_demo_sup:start_link(),
     LEDs = [1, 2],
     [grisp_led:flash(L, red, 500) || L <- LEDs],
     timer:sleep(5000),
