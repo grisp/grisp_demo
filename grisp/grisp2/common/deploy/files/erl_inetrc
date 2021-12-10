@@ -6,5 +6,8 @@
 % Disable caching
 {cache_size, 0}.
 
+% Enable EDNS
+{edns, 0}.
+
 % Specify lookup method
-{lookup, [file, native]}.
+{lookup, [file, dns]}.
