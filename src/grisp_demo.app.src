@@ -6,7 +6,8 @@
     {applications, [
         kernel,
         stdlib,
-        grisp
+        grisp,
+        grisp_cryptoauth
     ]},
     {env,[]},
     {modules, []},
