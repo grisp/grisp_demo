@@ -39,7 +39,7 @@ function usage() {
 	echo "  -o OUTPUT_IMG: Output image"
 	echo "    default: $OUTPUT_FILE"
 	echo "e.g."
-	echo "       $0 -t /opt/grisp/grisp2-rtems-toolchain -n grisp_demo -v 1.0.1"
+	echo "       $0 -t /opt/grisp/grisp2-rtems-toolchain -n grisp_demo -v 0.1.0"
 	exit $code
 }
 
