@@ -30,7 +30,7 @@ Then you can build OTP with:
 
 Now you can generate the EMMC demo image:
 
-	./make_image.sh -t {{GRISP_TOOLCHAIN_ROOT}} -n grisp_demo -v 0.1.0
+	$ ./make_image.sh -t {{GRISP_TOOLCHAIN_ROOT}} -n grisp_demo -v 0.1.0
 
 
 ## Flashing EMMC Image
@@ -41,24 +41,24 @@ To flash the image to the GRiSP board:
 
 	**macOS**
 	```
-	cp grisp2_emmc.img.gz /Volumes/GRISP
+	$ cp grisp2_emmc.img.gz /Volumes/GRISP
 	```
 
 	**Linux**
 	```
-	cp grisp2_emmc.img.gz /media/$USER/GRISP
+	$ cp grisp2_emmc.img.gz /media/$USER/GRISP
 	```
 
 2. Unmount the SD card:
 
 	**macOS**
 	```
-	diskutil umount /Volumes/GRISP
+	$ diskutil umount /Volumes/GRISP
 	```
 
 	**Linux**
 	```
-	umount /media/$USER/GRISP
+	$ umount /media/$USER/GRISP
 	```
 
 3. Insert the SD card in the GRiSP board.
@@ -68,6 +68,11 @@ To flash the image to the GRiSP board:
 	**macOS**
 	```
 	$ screen /dev/tty.usbserial-010031 115200
+	```
+
+	**Linux**
+	```
+	$ screen /dev/ttyUSB1 115200
 	```
 
 4. Reset the board using the button on the board.
