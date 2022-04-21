@@ -1,13 +1,15 @@
 {application, grisp_demo, [
     {description, "GRiSP demonstration application"},
-    {vsn, "0.1.0"},
+    {vsn, "0.2.0"},
     {registered, []},
     {mod, {grisp_demo, []}},
     {applications, [
         kernel,
         stdlib,
+        certifi,
         grisp,
-        grisp_cryptoauth
+        grisp_updater_grisp2,
+        grisp_connect
     ]},
     {env,[]},
     {modules, []},

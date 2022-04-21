@@ -1,102 +1,126 @@
 # grisp_demo
 
-Demo application for GRiSP boards
-
-## Generate GRiSP EMMC Image
-
-**WARNING** This script has only been tested on Linux **WARNING**
-
-First you need the full toolchain already built:
-
-	$ cd {{GRISP_TOOLCHAIN_ROOT}}
-	$ make install
-
-Then you need to build OTP for the project. rebar3 may be able to download a
-pre-built image of OTP, if it is not working you should add this to rebar.config
-in the `grisp` section:
-
-	{platform, grisp2},
-    {build, [
-        {toolchain, [
-            {directory,"{{GRISP_TOOLCHAIN_ROOT}}/rtems/5"}
-		]}
-    ]},
-
-replacing GRISP_TOOLCHAIN_ROOT by the path to the toolchain checkout built previously.
-
-Then you can build OTP with:
-
-	$ rebar3 grisp build
-
-Now you can generate the EMMC demo image:
-
-	$ ./make_image.sh -t {{GRISP_TOOLCHAIN_ROOT}} -n grisp_demo -v 0.1.0
+Demo application for GRiSP boards.
+It includes grisp_connect to interface with grisp.io services,
+and grisp_updater to enable software updates.
 
 
-## Flashing EMMC Image
+## Generate GRiSP Firmwares
 
-To flash the image to the GRiSP board:
+To generate the firmware image to write on the GRiSP board EMMC, run:
 
-1. Copy the image to an SD card:
+	rebar3 as dev grisp firmware -i
 
-	**macOS**
-	```
-	$ cp grisp2_emmc.img.gz /Volumes/GRISP
+or:
+
+	rebar3 as prod grisp firmware -i
+
+This generate the system firmware to update a single system partition,
+and the full EMMC image to reset the GRiSP board EMMC.
+See [rebar3_grisp documentation](https://hexdocs.pm/rebar3_grisp/readme.html#generate-grisp-2-firmwares)
+for more information on how to write firmwares.
+
+
+## Generate a software update package
+
+To create a software update package, run:
+
+	$ rebar3 as dev grisp pack
+
+or:
+
+	$ rebar3 as prod grisp pack
+
+This will generate an unsigned package, for the package to be verified you need to:
+
+ - Change the configuration key `signature_check` to `true`.
+ - Add the public key into `priv/certificates/updates`.
+ - Generate the package with either:
+
+ 	```
+	$ rebar3 as prod grisp pack -k private_key.pem
+	$ rebar3 as dev grisp pack -k private_key.pem
 	```
 
-	**Linux**
-	```
-	$ cp grisp2_emmc.img.gz /media/$USER/GRISP
-	```
+Note that updates will be verified only after this change itself is installed
+on the board.
 
-2. Unmount the SD card:
+See [rebar3_grisp documentation](https://hexdocs.pm/rebar3_grisp/readme.html#build-software-update-package)
+for more information on how to update.
 
-	**macOS**
-	```
-	$ diskutil umount /Volumes/GRISP
-	```
 
-	**Linux**
-	```
-	$ umount /media/$USER/GRISP
-	```
+## Development
 
-3. Insert the SD card in the GRiSP board.
+Add your development server certificate if it is self-signed, or the
+development CA certificate used to sign the server certificate into
+`priv/certificates/servers`.
 
-4. Open a serial console to the board:
+e.g.
 
-	**macOS**
-	```
-	$ screen /dev/tty.usbserial-010031 115200
-	```
+	ln -s $MY_SERVER_REPO/priv/_dev_certs/www.seawater.local.CA.pem priv/certificates/servers/www.seawater.local.pem
 
-	**Linux**
-	```
-	$ screen /dev/ttyUSB1 115200
-	```
 
-4. Reset the board using the button on the board.
+### Local Development
 
-5. Open the bootloader console by pressing any key in the serial console
-   before 3 seconds.
+The local development release runs on the host itself and connects to a local server.
 
-6. Flash the compressed image, this could take some minutes:
+Add an entry in your local hosts file so the domain www.seawater.local points
+to your local development server. Remember to configure the local server to
+check the client certificate against the `grisp_connect` test CA.
 
-	```
-	:/ uncompress /mnt/mmc/grisp2_emmc.img.gz /dev/mmc1
-	```
+Start a local development shell:
 
-7. Remove the SD card.
+    rebar3 as local shell
 
-8. Reset the GRiSP board again, and it should boot the erlang demo.
+Run tests:
 
-9. To boot the RTEMS demo, go to the bootloader console by reseting and 
-   pressing a key before 3 seconds, then running:
+    rebar3 ct
 
-	```
-	:/ boot -m /mnt/emmc
-	```
 
-	That would list all the possible boot entries on the EMMC
-	select `GRiSP RTEMS Demo` to start the toolchain demo and get an RTEMS
-	shell.
+### Development on GRiSP Hardware
+
+The development release runs on a GRiSP board and connects to a local server.
+
+Add an entry in the grisp hosts file so the domain www.seawater.local points
+to your local development server.
+
+e.g. using `ifconfig` command (MacOS and older linux):
+
+	mkdir -p grisp/grisp2/common/deploy/files/etc
+    echo "$(ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{ print $2 }' | head -n 1) www.seawater.local" >> grisp/grisp2/common/deploy/files/etc/hosts
+
+e.g. using `ip` command (Newer linux):
+
+	mkdir -p grisp/grisp2/common/deploy/files/etc
+    echo "$(ip addr show | grep 'inet ' | grep -v 127.0.0.1 | awk '{print $2}' | cut -d/ -f1 | head -n 1) www.seawater.local" >> grisp/grisp2/common/deploy/files/etc/hosts
+
+The deploy the release, configure rebar3_grisp's deploy configuration in
+rebar.config and then run:
+
+    rebar3 as dev grisp deploy
+
+To generate the firmwares:
+
+	rebar3 as dev grisp firmware -i
+
+To create a softwre update package:
+
+	rebar3 as dev grisp pack
+
+
+## Production
+
+The production release runs on a GRiSP board and connect to a production server.
+
+To deploy on GRiSP hardware for production, configure rebar3_grisp's deploy
+configuration in rebar.config and then run:
+
+    rebar3 as prod grisp deploy
+
+To generate the firmwares:
+
+	rebar3 as prod grisp firmware -i
+
+To create a softwre update package:
+
+	rebar3 as prod grisp pack
