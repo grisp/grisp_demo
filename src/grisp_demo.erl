@@ -18,6 +18,7 @@ start(_Type, _Args) ->
         {rand:uniform(2) - 1, rand:uniform(2) -1, rand:uniform(2) - 1}
     end,
     grisp_led:pattern(2, [{500, Random}]),
+    grisp_led:color(1, blue),
     {ok, Supervisor}.
 
 % @private

@@ -6,8 +6,10 @@
     {applications, [
         kernel,
         stdlib,
+        gun,
         grisp,
-        grisp_cryptoauth
+        grisp_cryptoauth,
+        grisp_updater_grisp2
     ]},
     {env,[]},
     {modules, []},

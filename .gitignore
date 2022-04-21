@@ -17,5 +17,8 @@ _build/
 _checkouts/
 rebar3.crashdump
 
+# asdf
+.tool-versions
+
 # GRiSP
 _grisp
