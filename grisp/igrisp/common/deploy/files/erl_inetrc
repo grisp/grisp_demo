@@ -1,0 +1,13 @@
+%--- Erlang Inet Configuration -------------------------------------------------
+
+% Do not monitor the hosts file
+{hosts_file, ""}.
+
+% Disable caching
+{cache_size, 0}.
+
+% Enable EDNS
+{edns, 0}.
+
+% Specify lookup method
+{lookup, [file, dns]}.
