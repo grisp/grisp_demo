@@ -7,7 +7,9 @@
         kernel,
         stdlib,
         grisp,
-        grisp_cryptoauth
+        grisp_cryptoauth,
+        grisp_updater,
+        grisp_updater_grisp2
     ]},
     {env,[]},
     {modules, []},

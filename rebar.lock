@@ -1,12 +1,28 @@
 {"1.2.0",
-[{<<"epmd">>,
+[{<<"cowlib">>,{pkg,<<"cowlib">>,<<"2.7.3">>},2},
+ {<<"epmd">>,
   {git,"https://github.com/erlang/epmd",
        {ref,"4d1a595b9d5c32fc0e55f462da381de62de23bf0"}},
   0},
- {<<"mapz">>,{pkg,<<"mapz">>,<<"2.2.0">>},1}]}.
+ {<<"gun">>,{pkg,<<"gun">>,<<"1.3.3">>},1},
+ {<<"mapz">>,{pkg,<<"mapz">>,<<"2.2.0">>},1},
+ {<<"quickrand">>,{pkg,<<"quickrand">>,<<"2.0.4">>},2},
+ {<<"termseal">>,
+  {git,"https://github.com/grisp/termseal.git",
+       {ref,"e1d9afc0f47a13073cfca31af4a4ffb3a86e0bc1"}},
+  1},
+ {<<"uuid">>,{pkg,<<"uuid_erl">>,<<"2.0.4">>},1}]}.
 [
 {pkg_hash,[
- {<<"mapz">>, <<"81EE5AD249BBC9427DAA6C3EE5166F88A448C5B0B2F5BBEE0495266308AFF2BA">>}]},
+ {<<"cowlib">>, <<"A7FFCD0917E6D50B4D5FB28E9E2085A0CEB3C97DEA310505F7460FF5ED764CE9">>},
+ {<<"gun">>, <<"CF8B51BEB36C22B9C8DF1921E3F2BC4D2B1F68B49AD4FBC64E91875AA14E16B4">>},
+ {<<"mapz">>, <<"81EE5AD249BBC9427DAA6C3EE5166F88A448C5B0B2F5BBEE0495266308AFF2BA">>},
+ {<<"quickrand">>, <<"168CA3A8466A26912B8C3A1D6AA58975E1BB49E5C7AFB4998B80F6B90F910490">>},
+ {<<"uuid">>, <<"77C3E3EE1E1701A2856CE945846D7CEB71931C60633A305D0B0FEAE03B2B3B5C">>}]},
 {pkg_hash_ext,[
- {<<"mapz">>, <<"861A878A86AB7E5897A9B57B3CA0B188FB53CE2935B153872C61F6641E709AA8">>}]}
+ {<<"cowlib">>, <<"1E1A3D176D52DAEBBECBBCDFD27C27726076567905C2A9D7398C54DA9D225761">>},
+ {<<"gun">>, <<"3106CE167F9C9723F849E4FB54EA4A4D814E3996AE243A1C828B256E749041E0">>},
+ {<<"mapz">>, <<"861A878A86AB7E5897A9B57B3CA0B188FB53CE2935B153872C61F6641E709AA8">>},
+ {<<"quickrand">>, <<"4CB18E9304CF28E054E8DC6E151D1AC7F174E6FE31D5C1A07F71279B92A90800">>},
+ {<<"uuid">>, <<"7A4CCD1C151D9B88B4383FA802BCCF9BCB3754B7F53D7CAA164D51A14A6652E4">>}]}
 ].
