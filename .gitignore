@@ -17,5 +17,17 @@ _build/
 _checkouts/
 rebar3.crashdump
 
+# asdf
+.tool-versions
+
 # GRiSP
 _grisp
+
+# Emulation
+eeprom_*.dat
+dummy.*
+
+# Development files
+priv/certificates/servers/*
+priv/certificates/updates/*
+grisp/grisp2/common/deploy/files/etc/hosts
