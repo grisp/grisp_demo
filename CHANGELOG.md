@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.1.0] - 2025-02-26
+
+#### Changed
+- Update start colors.
+
 ## [1.0.0] - 2025-02-26
 
 #### Changed
@@ -16,5 +21,6 @@ and this project adheres to
 - Enable NTP.
 - Finetune log handlers configuration.
 
-[Unreleased]: https://github.com/grisp/grisp_demo/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/grisp/grisp_demo/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/grisp/grisp_demo/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/grisp/grisp_demo/compare/4a85b12e487e41ab6137c52be6ac6695ea0b9c44...1.0.0
