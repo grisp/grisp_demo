@@ -121,6 +121,11 @@ To generate the firmwares:
 
 	rebar3 as prod grisp firmware -i
 
-To create a softwre update package:
+To create a software update package:
 
 	rebar3 as prod grisp pack
+
+To deploy to grisp.io:
+
+	rebar3 grisp-io auth
+	rebar3 as prod grisp-io upload
