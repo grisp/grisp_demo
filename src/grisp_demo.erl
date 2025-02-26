@@ -12,13 +12,11 @@
 % @private
 start(_Type, _Args) ->
     {ok, Supervisor} = grisp_demo_sup:start_link(),
+    Colors = [{500, C} || C <- [magenta, white, aqua, yellow]],
     grisp_led:flash(2, red, 500),
     timer:sleep(5000),
-    Random = fun() ->
-        {rand:uniform(2) - 1, rand:uniform(2) -1, rand:uniform(2) - 1}
-    end,
-    grisp_led:pattern(2, [{500, Random}]),
-    grisp_led:color(1, green),
+    grisp_led:pattern(2, Colors),
+    grisp_led:color(1, blue),
     {ok, Supervisor}.
 
 % @private
