@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+#### Changed
+
+- Upgrade grisp_connect dependency for cluster support.
+- Add TLS distribution VM arguments and configuration file.
+
 ## [1.1.0] - 2025-02-26
 
 #### Changed
