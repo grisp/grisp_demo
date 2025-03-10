@@ -1,7 +1,7 @@
 [
     {client, [
         {verify_fun, {fun grisp_connect_crypto:verify_server/3, []}},
-        {cacertfile, "/etc/cluster.CA.pem"},
+        {cacertfile, "/etc/peers.CA.pem"},
         {certs_keys, [
             #{
                 certfile =>  "/etc/board.pem",
