@@ -68,6 +68,9 @@ Add an entry in your local hosts file so the domain www.seawater.local points
 to your local development server. Remember to configure the local server to
 check the client certificate against the `grisp_connect` test CA.
 
+For the default configuration to work, the grisp_connect dependency must be
+in your `_checkouts` directory.
+
 Start a local development shell:
 
     rebar3 as local shell
@@ -103,7 +106,7 @@ To generate the firmwares:
 
 	rebar3 as dev grisp firmware -i
 
-To create a softwre update package:
+To create a software update package:
 
 	rebar3 as dev grisp pack
 

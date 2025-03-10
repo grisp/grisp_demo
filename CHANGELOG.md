@@ -12,6 +12,8 @@ and this project adheres to
 
 - Upgrade grisp_connect dependency for cluster support.
 - Add TLS distribution VM arguments and configuration file.
+- Use simplified single-line log formatter for console, still sending full
+  reports to grisp.io.
 
 ## [1.1.0] - 2025-02-26
 
