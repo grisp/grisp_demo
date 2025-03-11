@@ -79,6 +79,15 @@ Run tests:
 
     rebar3 ct
 
+To start a local development shell with support for TLS distribution, you need 
+first to generate a testing CA and certificate:
+
+	local/setup.sh
+
+Then you can start the shell with:
+
+	ERL_FLAGS='-proto_dist inet_tls -ssl_dist_optfile local/ssl_dist_opts.rel -connect_all false' rebar3 as local shell --sname local --setcookie grisp
+
 
 ### Development on GRiSP Hardware
 

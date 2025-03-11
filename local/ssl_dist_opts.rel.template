@@ -1,0 +1,14 @@
+[
+    {server, [
+        {cacertfile, \"$PEERS_CA_CHAIN\"},
+        {certs_keys, [
+            #{
+                certfile =>  \"$ROOT/local.pem\",
+                keyfile => \"$ROOT/local.key\"
+            }
+        ]},
+        {verify, verify_peer},
+        {secure_renegotiate, true},
+        {fail_if_no_peer_cert, true}
+    ]}
+].
