@@ -132,3 +132,17 @@ To deploy to grisp.io:
 
 	rebar3 grisp-io auth
 	rebar3 as prod grisp-io upload
+
+
+## Known Issues
+
+### Issues with hostname resolution (nxdomain)
+
+For proper DNS resolution using DHCP-given DNS, when building from a pre-built
+OTP package, the minimum OTP version MUST be 27.2.4.
+If you still have issues, you may have an old version of the pre-built package.
+Try cleaning up the pre-built package cache.
+
+On MacOS:
+
+	rm ~/Library/Caches/grisp/packages/grisp2/otp/*
