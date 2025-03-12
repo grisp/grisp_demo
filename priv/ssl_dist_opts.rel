@@ -1,0 +1,18 @@
+[
+    {client, [
+        {verify_fun, {fun grisp_connect_crypto:verify_server/3, []}},
+        {cacertfile, "/etc/peers.CA.pem"},
+        {certs_keys, [
+            #{
+                certfile =>  "/etc/board.pem",
+                key => #{
+                    algorithm => ecdsa,
+                    sign_fun => fun grisp_cryptoauth:sign_fun/3
+                }
+            }
+        ]},
+        {signature_algs, [{sha256, rsa}, {sha256, ecdsa}]},
+        {verify, verify_peer},
+        {secure_renegotiate, true}
+    ]}
+].

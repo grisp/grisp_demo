@@ -9,11 +9,11 @@ and grisp_updater to enable software updates.
 
 To generate the firmware image to write on the GRiSP board EMMC, run:
 
-	rebar3 as dev grisp firmware -i
+	rebar3 as dev grisp firmware -i -r -f
 
 or:
 
-	rebar3 as prod grisp firmware -i
+	rebar3 as prod grisp firmware -i -r -f
 
 This generate the system firmware to update a single system partition,
 and the full EMMC image to reset the GRiSP board EMMC.
@@ -25,11 +25,11 @@ for more information on how to write firmwares.
 
 To create a software update package, run:
 
-	$ rebar3 as dev grisp pack
+	$ rebar3 as dev grisp pack -r -f
 
 or:
 
-	$ rebar3 as prod grisp pack
+	$ rebar3 as prod grisp pack -r -f
 
 This will generate an unsigned package, for the package to be verified you need to:
 
@@ -38,8 +38,8 @@ This will generate an unsigned package, for the package to be verified you need 
  - Generate the package with either:
 
  	```
-	$ rebar3 as prod grisp pack -k private_key.pem
-	$ rebar3 as dev grisp pack -k private_key.pem
+	$ rebar3 as prod grisp pack -r -f -k private_key.pem
+	$ rebar3 as dev grisp pack -r -f -k private_key.pem
 	```
 
 Note that updates will be verified only after this change itself is installed
@@ -68,6 +68,9 @@ Add an entry in your local hosts file so the domain www.seawater.local points
 to your local development server. Remember to configure the local server to
 check the client certificate against the `grisp_connect` test CA.
 
+For the default configuration to work, the grisp_connect dependency must be
+in your `_checkouts` directory.
+
 Start a local development shell:
 
     rebar3 as local shell
@@ -75,6 +78,15 @@ Start a local development shell:
 Run tests:
 
     rebar3 ct
+
+To start a local development shell with support for TLS distribution, you need 
+first to generate a testing CA and certificate:
+
+	local/setup.sh
+
+Then you can start the shell with:
+
+	ERL_FLAGS='-proto_dist inet_tls -ssl_dist_optfile local/ssl_dist_opts.rel -connect_all false' rebar3 as local shell --sname local --setcookie grisp
 
 
 ### Development on GRiSP Hardware
@@ -101,11 +113,11 @@ rebar.config and then run:
 
 To generate the firmwares:
 
-	rebar3 as dev grisp firmware -i
+	rebar3 as dev grisp firmware -i -r -f
 
-To create a softwre update package:
+To create a software update package:
 
-	rebar3 as dev grisp pack
+	rebar3 as dev grisp pack -r -f
 
 
 ## Production
@@ -119,13 +131,27 @@ configuration in rebar.config and then run:
 
 To generate the firmwares:
 
-	rebar3 as prod grisp firmware -i
+	rebar3 as prod grisp firmware -i -r -f
 
 To create a software update package:
 
-	rebar3 as prod grisp pack
+	rebar3 as prod grisp pack -r -f
 
 To deploy to grisp.io:
 
 	rebar3 grisp-io auth
-	rebar3 as prod grisp-io upload
+	rebar3 as prod grisp-io upload -r -f
+
+
+## Known Issues
+
+### Issues with hostname resolution (nxdomain)
+
+For proper DNS resolution using DHCP-given DNS, when building from a pre-built
+OTP package, the minimum OTP version MUST be 27.2.4.
+If you still have issues, you may have an old version of the pre-built package.
+Try cleaning up the pre-built package cache.
+
+On MacOS:
+
+	rm ~/Library/Caches/grisp/packages/grisp2/otp/*
