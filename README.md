@@ -64,9 +64,11 @@ e.g.
 
 The local development release runs on the host itself and connects to a local server.
 
-Add an entry in your local hosts file so the domain www.seawater.local points
-to your local development server. Remember to configure the local server to
-check the client certificate against the `grisp_connect` test CA.
+Add a hosts file in 'grisp/grisp2/common/deploy/files/etc/hosts' so the domain
+www.seawater.local points to your local development server. Add the server
+certificate chain in `priv/certificates/servers/www.seawater.local.pem`.
+Remember to configure the local server to check the client certificate against
+the `grisp_connect` test CA.
 
 For the default configuration to work, the grisp_connect dependency must be
 in your `_checkouts` directory.
